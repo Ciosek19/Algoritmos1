@@ -6,4 +6,4 @@
 
 **Tema:** TA-TE-TI
 
-**Descripción:** Diseño e implementación de un algoritmo que realiza una interaccion con el usuario mediante la consola creando el juego tateti.
+**Descripción:** Diseño e implementación de un algoritmo que realiza interacciones con el usuario mediante la consola creando el juego tateti.
