@@ -1,12 +1,12 @@
 import java.io.Console;
 import java.util.Scanner;
 
-public class Tarea1 {
+public class Tarea2 {
 
     static Boolean turnoPlayer1 = true;
     static Scanner sc = new Scanner(System.in);
 
-    static char[][] tateti = {
+    private static final char[][] tateti = {
             {'-', '-', '-'},
             {'-', '-', '-'},
             {'-', '-', '-'},
@@ -37,31 +37,75 @@ public class Tarea1 {
 
     public static void Juego(){
         boolean juegoTerminado = false;
-        while (!juegoTerminado){
-            mostrarJuego();
-            int[] posicion = {0,0};
-            while (!validarJugada(posicion)){
-                System.out.println("Jugada no valida");
-                posicion = jugada();
-            }
-            System.out.println("Correcta");
-        }
-    }
-    public static int[] jugada(){
         int[] jugada = new int[2];
+        char letra = 'X';
+        // Mientras el juego siga
+        while (!juegoTerminado){
+            letra = turnoPlayer1 ? 'X' : 'O';
+            //      Mostrar el juego
+            mostrarJuego();
+
+            //      Pedir jugada al usuario
+            jugada = pedirJugada(turnoPlayer1);
+
+            //      Validar jugada del usuario
+            while(!validarJugada(jugada)){
+                //      Si no es valida que ingrese devuelta
+                System.out.println("Jugada no valida");
+                System.out.println(jugada[0]+", "+jugada[1]);
+                mostrarJuego();
+                jugada = pedirJugada(turnoPlayer1);
+
+            }
+
+            //      Ver si es el player1 o no para colocar las letras
+            //      Modificar el tateti
+            insertarJugada(jugada[0],jugada[1],letra);
+
+            //      Ver si gano el juego o hubo empate
+            //      Mostrar el resultado
+            if (ganoJugador(letra)){
+                juegoTerminado = true;
+            } else if(huboEmpate()){
+                juegoTerminado = true;
+                letra = '-';
+            }
+            turnoPlayer1 = !turnoPlayer1;
+       }
+        mostrarJuego();
+        darVeredicto(letra);
+
+    }
+
+    public static boolean huboEmpate(){
+        boolean empate = true;
+        for (int i = 0; i < tateti.length; i++) {
+            for (int j = 0; j < tateti[i].length; j++) {
+                if (tateti[i][j] == '-') {
+                    return false;
+                }
+            }
+        }
+        return empate;
+    }
+
+    public static int[] pedirJugada(boolean turnoPlayer1){
+        String jugador = turnoPlayer1 ? "Player1" : "Player2";
+        int[] jugada = new int[2];
+        System.out.println("Turno de "+jugador);
         //Fila
         System.out.println("Ingrese fila: ");
         try {
-            jugada[0] = Integer.parseInt(sc.nextLine());
+            jugada[0] = Integer.parseInt(sc.nextLine()) - 1;
         } catch(Exception e){
-            jugada[0] = 0;
+            jugada[0] = -1;
         }
         //Columna
         System.out.println("Ingrese columna: ");
         try {
-            jugada[1] = Integer.parseInt(sc.nextLine());
+            jugada[1] = Integer.parseInt(sc.nextLine()) - 1;
         } catch(Exception e){
-            jugada[1] = 0;
+            jugada[1] = -1;
         }
         return jugada;
     }
@@ -84,15 +128,15 @@ public class Tarea1 {
         tateti[fila][columna] = letra;
     }
 
-    public static Boolean validarJugada(int[] jugada){
-        return tateti[jugada[0]][jugada[1]] == '-';
+    public static boolean validarJugada(int[] jugada, int[][] matriz){
+        return validarFilasColumna(jugada[0],jugada[1]) && tateti[jugada[0]][jugada[1]] == '-';
     }
 
-    public static Boolean validarFilasColumna(int fila, int columna){
-        return fila <= tateti.length && columna <= tateti.length && fila > 0 && columna > 0;
+    public static boolean validarFilasColumna(int fila, int columna){
+        return fila <= tateti.length && columna <= tateti.length && fila >= 0 && columna >= 0;
     }
 
-    public static Boolean ganoJugador(char letra){
+    public static boolean ganoJugador(char letra){
         boolean gana = false;
         //Por filas
         for (int i = 0; i < tateti.length; i++) {
@@ -122,24 +166,13 @@ public class Tarea1 {
         return gana;
     }
 
+    public static void darVeredicto(char letra){
+        if (letra == 'X') System.out.println("Player1 win");
+        else if (letra == 'O') System.out.println("Player2 win");
+        else System.out.println("Empate");
+    }
 
     public static void main(String[] args) {
         Inicio();
     }
 }
-/*
-i = 1
-i = 2
-i = 3
-[0][2] = .legnth - 1
-[1][1] = .length - 2
-[2][0] = .lenght - 3
-
-    - | - | -
-    - | - | -
-    - | - | -
-
-    0 | 1 | 2
-    0 | 1 | 2
-    0 | 1 | 2
- */
