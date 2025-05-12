@@ -1,5 +1,5 @@
-public class main {
+public class Main {
     public static void main(String[] args) {
-        Tarea2.inicio();
+        Tateti.inicio();
     }
 }

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Tarea2 {
+public class Tateti {
 
     private static Boolean turnoPlayer1 = true;
     private static Scanner sc = new Scanner(System.in);
@@ -52,7 +52,6 @@ public class Tarea2 {
             while(!validarJugada(jugada)){
                 //      Si no es valida que ingrese devuelta
                 System.out.println("Jugada no valida");
-                System.out.println(jugada[0]+", "+jugada[1]);
                 mostrarJuego();
                 jugada = pedirJugada(turnoPlayer1);
 
@@ -74,7 +73,7 @@ public class Tarea2 {
        }
         mostrarJuego();
         darVeredicto(letra);
-
+        inicio();
     }
 
     private static void mostrarJuego(){
@@ -109,6 +108,11 @@ public class Tarea2 {
         } catch(Exception e){
             jugada[1] = -1;
         }
+        //Por si desea salir
+        System.out.println("Ingrese 's' si quiere salir: ");
+        String salida = sc.nextLine().toLowerCase();
+        if (salida.equals("s")) System.exit(0);
+
         return jugada;
     }
 
