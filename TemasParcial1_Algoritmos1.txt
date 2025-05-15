@@ -1,0 +1,34 @@
+Estructura del parcial
+	Preguntas Multiple opcion
+	Preguntas de Desarrollo (que no sea redaccion)
+	Solucion de codigos
+	Funcion iterativa conversion a Recursion o viceversa
+	Ver codigo y decir que hace el codigo
+
+Algoritmos
+	Definicion algoritmo
+	Caracteristicas principales
+	Componentes
+
+Estructura datos
+	Concepto
+	Tipos (primitivas, abstractas, lineales, no lineales, etc)
+	
+Metodologias resolucion de problemas
+	Pasos para resolver un problema
+	Entradas/Salidas
+	Pre/Post condiciones
+
+Arrays (Vector)
+	Concepto general
+	Sintaxis creacion, instancia
+	TODO
+
+Matriz
+	Concepto general
+	Sintaxis creacion, instancia
+	TODO
+
+Recursion
+	Ejercicios practicos
+	TODO
