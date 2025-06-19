@@ -62,13 +62,45 @@ public class ListaEnteros {
         else {
             Nodo aux = cabeza.getSiguiente();
             cabeza = aux;
+            tamanio--;
         }
     }
 
     public ListaEnteros retornarCola() {
-        if (this.estaVacia()) return null;
         ListaEnteros nuevaLista = new ListaEnteros();
+        if (this.estaVacia()) return nuevaLista;
         Nodo aux = this.cabeza.getSiguiente();
+        nuevaLista.cabeza = aux;
+        nuevaLista.tamanio = this.tamanio-1;
+        return nuevaLista;
+    }
+
+    public void insertarDatoAlFinal(int dato){
+        Nodo nuevoNodo = new Nodo(dato);
+        if (this.estaVacia()){
+            this.cabeza = nuevoNodo;
+        }
+        else {
+            Nodo aux = this.cabeza;
+            while(aux.getSiguiente() != null){
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(nuevoNodo);
+        }
+        tamanio++;
+    }
+
+/*
+    5. Crear una función que retorne la lista con los datos invertidos.
+    6. Crear una función booleana que retorne true si la lista esta ordenada ascendentemente.
+    7. Crear una función que cuenta la lista ineficientemente.
+    8. Crear función que retorne el valor máximo de la vista.
+    9. Crear función que retorne el promedio de la lista.
+    10. Crear función que retorne nueva lista: (int a, int b) que los que tengan valor "a" los reemplaze por el valor de "b".
+*/
+    public ListaEnteros invertirDatos(){
+        ListaEnteros nuevaLista = new ListaEnteros();
+        Nodo aux = this.cabeza;
         while(aux != null){
             nuevaLista.insertarAlIncio(aux.getValor());
             aux = aux.getSiguiente();
@@ -76,19 +108,69 @@ public class ListaEnteros {
         return nuevaLista;
     }
 
-    public void insertarDatoAlFinal(int dato){
-        if (this.estaVacia()){
-            insertarAlIncio(dato);
+    public boolean estaAscendente(){
+        if (this.estaVacia()) return false;
+        if (this.tamanio < 2) return true;
+        Nodo aux = this.cabeza;
+        int valorMax = aux.getValor();
+        while(aux.getSiguiente() != null){
+            valorMax = aux.getValor();
+            if (valorMax < aux.getSiguiente().getValor()){
+                valorMax = aux.getSiguiente().getValor();
+            }
+            else{
+                return false;
+            }
+            aux = aux.getSiguiente();
         }
+        return true;
+    }
+
+    public int longitudIneficiente(){
+        if (this.estaVacia()) return 0;
+        int contador = 0;
+        Nodo aux = this.cabeza;
+        while(aux != null){
+            aux = aux.getSiguiente();
+            contador++;
+        }
+        return contador;
+    }
+
+    public int maximoDeLaLista(){
+        if (this.estaVacia()) return 0;
+        Nodo aux = this.cabeza;
+        int valorMax = 0;
+
+        while(aux != null){
+            if (valorMax < aux.getValor()){
+                valorMax = aux.getValor();
+            }
+            aux = aux.getSiguiente();
+        }
+        return valorMax;
+    }
+
+    public float promedioDeLaLista(){
+        if (this.estaVacia()) return 0;
+        Nodo aux = this.cabeza;
+        int sumador = 0;
+        while (aux != null){
+            sumador += aux.getValor();
+            aux = aux.getSiguiente();
+        }
+        return (float) sumador /tamanio;
+    }
+
+    public void reemplazarValores(int a, int b){
+        if (this.estaVacia()) System.out.println("La lista esta vacia");
         else {
-            Nodo nuevoNodo = new Nodo(dato);
             Nodo aux = this.cabeza;
             while(aux != null){
-                if (aux.getSiguiente() == null) {
-                    aux.setSiguiente(nuevoNodo);
+                if (aux.getValor() == a){
+                    aux.setValor(b);
                 }
                 aux = aux.getSiguiente();
-                System.out.println(aux.getValor());
             }
         }
     }

@@ -3,30 +3,29 @@ import java.sql.SQLOutput;
 public class Main {
     public static void main(String[] args) {
         ListaEnteros lista = new ListaEnteros();
-
-        lista.insertarAlIncio(1);
-        lista.insertarAlIncio(4);
-        lista.insertarAlIncio(10);
-        lista.insertarAlIncio(117);
-        lista.insertarAlIncio(18);
-        lista.insertarAlIncio(15);
-
-        lista.imprimirLista();
-
-        System.out.println("Pertence el 1 al a lista? " + lista.pertenece(1));
-        System.out.println("Pertence el 4 al a lista? " + lista.pertenece(4));
-        System.out.println("Pertence el 15 al a lista? " + lista.pertenece(15));
-
-        lista.eliminarPrimerElemento();
-        System.out.println("Mostrando lista luego de eliminar");
-        lista.imprimirLista();
-
-        System.out.println("Mostrando lista nueva sin la cabeza");
-        ListaEnteros nuevaLista = lista.retornarCola();
-        nuevaLista.imprimirLista();
-
-        System.out.println("Insertando dato al final:");
+        lista.insertarDatoAlFinal(1);
+        lista.insertarDatoAlFinal(2);
+        lista.insertarDatoAlFinal(3);
         lista.insertarDatoAlFinal(4);
+        lista.insertarDatoAlFinal(5);
         lista.imprimirLista();
+        System.out.println("-------");
+
+        ListaEnteros nuevaLista = lista.invertirDatos();
+        System.out.println("Imprimiendo lista con datos invertidos");
+        nuevaLista.imprimirLista();
+        System.out.println("-----");
+        System.out.println("Lista tiene los datos en ascendentes? "+ lista.estaAscendente());
+        System.out.println("Lista invertida tiene los datos en ascendentes? "+ nuevaLista.estaAscendente());
+        System.out.println("-----");
+        System.out.println("El tamaño de la lista es "+lista.longitudIneficiente());
+        System.out.println("-----");
+        System.out.println("El maximo de la lista es "+lista.maximoDeLaLista());
+        System.out.println("-----");
+        System.out.println("El promedio de la lista es "+lista.promedioDeLaLista());
+        System.out.println("-----");
+
+
+
     }
 }
